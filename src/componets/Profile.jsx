@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import './Profile.css';
 
-const Profile = (props) => {
-	console.log(props)
+const Profile = () => {
 	return  <div className='content'>
 		<div>
-	<img src={props.file}/>
+	<img src='https://avatars.mds.yandex.net/i?id=e3635bf538a886b56c595c1263c39ce33cc12abb-6846484-images-thumbs&n=13'/>
 	</div>
 	<div>
 		 ava+ description
