@@ -3,7 +3,7 @@ import s from './Header.module.css';
 
 const Header = () => {
 	return  <header className={s.header}>
-    	  <img src='https://avatars.mds.yandex.net/i?id=51040a155e624bf71fb9818998f5f661c18258f3-5330065-images-thumbs&n=13'/>
+    	  <img src='https://img.freepik.com/free-vector/professional-gg-logotype-template_23-2149221834.jpg?ga=GA1.1.1670337544.1726774736&semt=ais_hybrid'/>
     </header>
 }
 
