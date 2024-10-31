@@ -14,7 +14,7 @@ let newMessagesElement = React.createRef();
 
 
 
-let addUser = () => {
+let sendMessage = () => {
 	 let text = newMessagesElement.current.value;
 	 alert (text);
 }
@@ -25,15 +25,15 @@ let addUser = () => {
 		<div className={s.dialogs}>
 			 <div className={s.dialogsItems}>
 				 {dialogsElements}	
-				 <div>
-	     	<button onClick={addUser }>add</button>
-		   </div>
 			 </div>
 			 <div className={s.messages}>
 				{messagesElements}
 				<div>
 	      <textarea ref={newMessagesElement}></textarea>
 		    </div>
+       	 <div>
+	     	<button onClick={sendMessage}>send message</button>
+		   </div>
 			 </div>
 		</div>
 	)
