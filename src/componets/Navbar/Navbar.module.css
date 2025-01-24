@@ -10,7 +10,7 @@
 	text-decoration: none;
 }
 
-.item a:focus {
+.item a :focus {
 	color: black
 }
 
