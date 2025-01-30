@@ -5,7 +5,7 @@ import Navbar from './componets/Navbar/Navbar';
 import Profile from './componets/Profile/Profile';
 import Dialogs from './componets/Dialogs/Dialogs';
 import  {Routes,Route}    from 'react-router-dom';
-import store from './redux/state';
+
 
 
 
@@ -18,8 +18,7 @@ const App = (props) => {
 				<Routes>
 				  <Route path='/Dialogs/*'element ={<Dialogs store={props.store}  />} />
 					                                          
-			  	<Route path='/Profile/*'element ={<Profile profilePage={props.state.profilePage} 
-				                                              	dispatch={props.dispatch} /> }/> 		
+			  	<Route path='/Profile/*'element ={<Profile store={props.store} /> }/> 		
 																																										 																						 			
 				</Routes>
 		</div>
