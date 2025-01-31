@@ -3,8 +3,8 @@ import './App.css';
 import Header from './componets/Header/Header';
 import Navbar from './componets/Navbar/Navbar';
 import Profile from './componets/Profile/Profile';
-import Dialogs from './componets/Dialogs/Dialogs';
 import  {Routes,Route}    from 'react-router-dom';
+import DialogsContainer from './componets/Dialogs/DialogsContainer';
 
 
 
@@ -16,10 +16,9 @@ const App = (props) => {
 		  <Navbar />
 			<div className='app-wrapper-content'>	
 				<Routes>
-				  <Route path='/Dialogs/*'element ={<Dialogs store={props.store}  />} />
+				  <Route path='/Dialogs/*'element ={<DialogsContainer store={props.store}  />} />
 					                                          
-			  	<Route path='/Profile/*'element ={<Profile store={props.store} /> }/> 		
-																																										 																						 			
+			  	<Route path='/Profile/*'element ={<Profile store={props.store} /> }/> 																																				 																						 			
 				</Routes>
 		</div>
 		</div>
