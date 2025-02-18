@@ -16,9 +16,9 @@ const App = (props) => {
 		  <Navbar />
 			<div className='app-wrapper-content'>	
 				<Routes>
-				  <Route path='/Dialogs/*'element ={<DialogsContainer store={props.store}  />} />
+				  <Route path='/Dialogs/*'element ={<DialogsContainer />} />
 					                                          
-			  	<Route path='/Profile/*'element ={<Profile store={props.store} /> }/> 																																				 																						 			
+			  	<Route path='/Profile/*'element ={<Profile /> }/> 																																				 																						 			
 				</Routes>
 		</div>
 		</div>
