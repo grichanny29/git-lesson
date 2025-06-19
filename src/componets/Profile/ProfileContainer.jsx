@@ -1,29 +1,158 @@
-	import React from 'react';
-	import s from './Profile.module.css';
-	import axios from 'axios';
-  import Profile from './Profile';
-  import { connect } from 'react-redux';
-	import { setUserProfile } from '../../redux/profile-reduser';
+// import React, {useEffect} from 'react';
+// import {connect} from "react-redux";
+// import Profile from "./Profile";
+// import axios from "axios";
+// import {useParams} from "react-router-dom";
+// import {setUserProfile } from '../../redux/profile-reduser';
+
+// function ProfileContainer(props) {
+//     let {userId} = useParams();
+//     if (!userId) {
+//         userId = 2;
+//     }
+//     useEffect(() => {
+//         axios
+//             .get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
+//             .then((response) => {
+//                 props.setUserProfile(response.data);
+//             });
+//     }, [userId]);
+
+//     return (
+//         <div>
+//             <Profile profile={props.profile} />
+//         </div>
+//     );
+// }
+
+// let mapStateToProps = (state)=> ({
+//     profile: state.profilePage.profile
+// })
+
+// export default connect (mapStateToProps, {setUserProfile})(ProfileContainer)
+
+
+
+
+
+
+
+
+
+
+
+//   import React from 'react';
+// 	import s from './Profile.module.css';
+// 	import axios from 'axios';
+//   import Profile from './Profile';
+//   import { connect } from 'react-redux';
+// 	import { setUserProfile } from '../../redux/profile-reduser';
+//   import {useParams} from "react-router-dom"
 	
-	class ProfileContainer extends React.Component {
+// export function withRouter(Children) {
+//     return(props)=> {
+//         const match  = {params: useParams()};
+//         return <Children {...props}  match={match}/>
+//     }
+// }
 
-   componentDidMount () {
-			axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).
-						 then (response => {
-								this.props.setUserProfile(response.data);
-			});
-	 }
+// 	class ProfileContainer extends React.Component {
+//    componentDidMount () {
+// 		debugger;
+// 		let userId = this.props.match.params.userId;
 
-		render () {
-       return (
-		<Profile {...this.props} profile={this.props.profile} />
-	)
-	}
-		}
+// 			axios.get(`https://social-network.samuraijs.com/api/1.0/profile/`+userId).
+// 						 then (response => {
+// 								this.props.setUserProfile(response.data);
+// 			});
+// 	 }
+
+// 		render () {
+//        return (
+// 		<Profile {...this.props} profile={this.props.profile} />
+// 	)
+// 	}
+// 		}
 		
 
-	let mapStateToProps = (state) => ({
-       profile: state.profilePage.profile
-	});	
+// 	let mapStateToProps = (state) => ({
+//        profile: state.profilePage.profile
+// 	});	
 
-	export default connect (mapStateToProps,{setUserProfile} ) (ProfileContainer) ;
+//   let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+
+// 	export default connect (mapStateToProps,{setUserProfile} ) (WithUrlDataContainerComponent) ;
+
+
+// import React from 'react';
+// import s from './Profile.module.css';
+// import axios from 'axios';
+// import Profile from './Profile';
+// import { connect } from 'react-redux';
+// import { setUserProfile } from '../../redux/profile-reduser';
+// import { useParams } from "react-router-dom";
+// import { usersAPI } from '../../api/api';
+
+// export function withRouter(Children) {
+//     return (props) => {
+//         const match = { params: useParams() };
+//         return <Children {...props} match={match} />;
+//     };
+// }
+
+// class ProfileContainer extends React.Component {
+//     componentDidMount() {
+//         let userId = this.props.match.params.userId;
+//         if (!userId) {
+//             userId=2;
+//         }
+
+//        usersAPI.getProfile(userId)
+//             .then(response => {
+//                 this.props.setUserProfile(response.data);
+//             });
+//     }
+
+//     render() {
+//         return (
+//             <Profile {...this.props} profile={this.props.profile} />
+//         );
+//     }
+// }
+
+// let mapStateToProps = (state) => ({
+//     profile: state.profilePage.profile
+// });
+
+// let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+
+// export default connect(mapStateToProps, { setUserProfile })(WithUrlDataContainerComponent);
+
+
+import  { useEffect } from 'react';
+import s from './Profile.module.css';
+import { connect } from 'react-redux';
+import { setUserProfile } from '../../redux/profile-reduser';
+import { useParams } from 'react-router-dom';
+import { usersAPI } from '../../api/api';
+import Profile from './Profile';
+
+function ProfileContainer(props) {
+    const { userId } = useParams();
+
+    useEffect(() => {
+        let id = userId ? userId : 2; 
+        usersAPI.getProfile(id)
+            .then(response => {
+                props.setUserProfile(response.data);
+            });
+    }, [userId]);
+
+    return <Profile {...props} profile={props.profile} />;
+}
+
+const mapStateToProps = (state) => ({
+    profile: state.profilePage.profile
+});
+
+export default connect(mapStateToProps, { setUserProfile })(ProfileContainer);
