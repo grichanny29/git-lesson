@@ -129,30 +129,61 @@
 // export default connect(mapStateToProps, { setUserProfile })(WithUrlDataContainerComponent);
 
 
-import  { useEffect } from 'react';
+// import  { useEffect } from 'react';
+// import s from './Profile.module.css';
+// import { connect } from 'react-redux';
+// import { getUserProfile } from '../../redux/profile-reduser';
+// import { useParams } from 'react-router-dom';
+// // import { usersAPI } from '../../api/api';
+// import Profile from './Profile';
+
+// function ProfileContainer(props) {
+//     const { userId } = useParams();
+
+//     useEffect(() => {
+//         let id = userId ? userId : 2; 
+// 				this.props.getUserProfile(userId);
+       
+//     }, [userId]);
+
+//     return <Profile {...props} profile={props.profile} />;
+// }
+
+// const mapStateToProps = (state) => ({
+//     profile: state.profilePage.profile
+// });
+
+// export default connect(mapStateToProps, { getUserProfile })(ProfileContainer);
+
+import { useEffect } from 'react';
 import s from './Profile.module.css';
 import { connect } from 'react-redux';
-import { setUserProfile } from '../../redux/profile-reduser';
-import { useParams } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
+import { getUserProfile } from '../../redux/profile-reduser';
+import {  useParams } from 'react-router-dom';
 import Profile from './Profile';
+import { withAuthNavigate } from '../../hoc/withAuthNavigate'
 
 function ProfileContainer(props) {
     const { userId } = useParams();
 
     useEffect(() => {
-        let id = userId ? userId : 2; 
-        usersAPI.getProfile(id)
-            .then(response => {
-                props.setUserProfile(response.data);
-            });
-    }, [userId]);
+        const id = userId ? userId : 2; // или используйте Number(userId), если нужно число
+        props.getUserProfile(id);
+    }, [userId, props]);
+
+		
 
     return <Profile {...props} profile={props.profile} />;
 }
 
+let AuthNavigateComponent = withAuthNavigate ( ProfileContainer);
+
+
 const mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+		isAuth:state.auth.isAuth
 });
 
-export default connect(mapStateToProps, { setUserProfile })(ProfileContainer);
+export default  connect(mapStateToProps, { getUserProfile })(AuthNavigateComponent);
+
+

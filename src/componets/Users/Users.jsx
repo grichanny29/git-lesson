@@ -55,6 +55,7 @@
 
 // export default Users;
 
+
 import React from "react";
 import styles from './Users.module.css'
 import userphoto from '../../assets/images/Sample_User_Icon.png'
@@ -68,7 +69,7 @@ let Users = (props) => {
     }
 
     return (
-        <div>
+        <div className={styles.usersContainer}>
             {/* Постраничная навигация */}
             <div>
                 {pages.map(p => (
@@ -76,6 +77,7 @@ let Users = (props) => {
                         key={p}
                         className={props.currentPage === p ? styles.selectedPage : ''}
                         onClick={() => props.onPageChanged(p)}
+                        style={{ margin: '0 5px', cursor: 'pointer' }}
                     >
                         {p}
                     </span>
@@ -83,39 +85,39 @@ let Users = (props) => {
             </div>
 
             {/* Список пользователей */}
-            {props.users.map(u => (
-                <div key={u.id}>
-                    <span>
-                        <div>
-                            {/* Переход на профиль пользователя */}
-                            <NavLink to={`/profile/${u.id}`}>
-                                <img
-                                    src={u.photos?.small ?? userphoto}
-                                    className={styles.userphoto}
-                                    alt="User"
-                                />
-                            </NavLink>
-                        </div>
-                        <div>
-                            {/* Кнопки подписки/отписки */}
-                            {u.followed ? (
-                                <button
-                                    disabled={props.followingInProgress.some(id => id === u.id)}
-                                    onClick={() => props.unfollow(u.id)}
-                                >
-                                    Unfollow
-                                </button>
-                            ) : (
-                                <button
-                                    disabled={props.followingInProgress.some(id => id === u.id)}
-                                    onClick={() => props.follow(u.id)}
-                                >
-                                    Follow
-                                </button>
-                            )}
-                        </div>
-                    </span>
-                    <span>
+            <div className={styles.usersList}>
+                {props.users.map(u => (
+                    <div key={u.id} className={styles.userItem}>
+                        <span>
+                            <div>
+                                {/* Переход на профиль пользователя */}
+                                <NavLink to={`/profile/${u.id}`}>
+                                    <img
+                                        src={u.photos?.small ?? userphoto}
+                                        className={styles.userphoto}
+                                        alt="User"
+                                    />
+                                </NavLink>
+                            </div>
+                            <div>
+                                {/* Кнопки подписки/отписки */}
+                                {u.followed ? (
+                                    <button
+                                        disabled={props.followingInProgress.some(id => id === u.id)}
+                                        onClick={() => props.unfollow(u.id)}
+                                    >
+                                        Unfollow
+                                    </button>
+                                ) : (
+                                    <button
+                                        disabled={props.followingInProgress.some(id => id === u.id)}
+                                        onClick={() => props.follow(u.id)}
+                                    >
+                                        Follow
+                                    </button>
+                                )}
+                            </div>
+                        </span>
                         <span>
                             <div>{u.name}</div>
                             <div>{u.status}</div>
@@ -124,11 +126,12 @@ let Users = (props) => {
                             <div>{u.location?.country}</div>
                             <div>{u.location?.city}</div>
                         </span>
-                    </span>
-                </div>
-            ))}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
 
 export default Users;
+

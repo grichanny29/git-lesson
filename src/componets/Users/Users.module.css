@@ -7,3 +7,15 @@
 	font-weight: bold;
 	color: red;
 }
+
+
+
+.usersContainer {
+	width: 900px;
+	height: 1000px;
+  max-width: 100%; /* Ограничение ширины */
+  overflow-x: auto; /* Добавляет горизонтальную прокрутку при необходимости */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
