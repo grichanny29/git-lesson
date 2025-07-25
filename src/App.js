@@ -15,10 +15,10 @@ const App = () => {
       <Navbar />
       <div className='app-wrapper-content'>
         <Routes>
-          <Route path='/Dialogs/*' element={<DialogsContainer />} />
-					<Route path ='/Profile/:userId?*' element = {<ProfileContainer />} />
-          <Route path='/Users/*' element={<UsersContainer />} />
-		       <Route path='/Login/*' element={<LoginPage />} />
+          <Route path='/Dialogs' element={<DialogsContainer />} />
+					<Route path ='/Profile/:userId?' element = {<ProfileContainer />} />
+          <Route path='/Users' element={<UsersContainer />} />
+		       <Route path='/Login' element={<LoginPage />} />
 					 
         </Routes>
       </div>

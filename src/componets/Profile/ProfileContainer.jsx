@@ -158,32 +158,35 @@
 import { useEffect } from 'react';
 import s from './Profile.module.css';
 import { connect } from 'react-redux';
-import { getUserProfile } from '../../redux/profile-reduser';
+import { getStatus, getUserProfile, updateStatus } from '../../redux/profile-reduser';
 import {  useParams } from 'react-router-dom';
 import Profile from './Profile';
-import { withAuthNavigate } from '../../hoc/withAuthNavigate'
+import { compose } from 'redux';
 
 function ProfileContainer(props) {
     const { userId } = useParams();
 
     useEffect(() => {
         const id = userId ? userId : 2; // или используйте Number(userId), если нужно число
-        props.getUserProfile(id);
-    }, [userId, props]);
+       props.getUserProfile(id);
+			 props.getStatus(id);
+    }, [userId, props.getUserProfile,props.getStatus]);
 
 		
 
-    return <Profile {...props} profile={props.profile} />;
+    return <Profile {...props} profile={props.profile} status={props.status} updateStatus={props.updateStatus} />;
 }
-
-let AuthNavigateComponent = withAuthNavigate ( ProfileContainer);
-
 
 const mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-		isAuth:state.auth.isAuth
+		status:state.profilePage.status
 });
 
-export default  connect(mapStateToProps, { getUserProfile })(AuthNavigateComponent);
+
+ export default compose(
+	 connect(mapStateToProps, { getUserProfile, getStatus, updateStatus }),
+	
+)
+( ProfileContainer);
 
 
