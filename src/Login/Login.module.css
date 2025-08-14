@@ -1,0 +1,20 @@
+.inputWrapper input {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  font-size: 14px;
+  width: 30;
+  margin-bottom: 5px;
+	margin-left: 5px;
+}
+
+.error input {
+  border: 1px solid red;
+  background-color: #ffe5e5;
+}
+
+.errorText {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+  display: block;
+}
