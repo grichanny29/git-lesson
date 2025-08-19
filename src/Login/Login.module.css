@@ -18,3 +18,15 @@
   margin-bottom: 10px;
   display: block;
 }
+
+
+.errorBorder input {
+  border: 2px solid red;
+}
+
+.errorText {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
