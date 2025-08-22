@@ -1,7 +1,7 @@
 
 import axios from "axios";
-import { getUsers } from "../redux/users-reduser";
-import { login, logout } from "../redux/auth-reduser";
+import { getUsers } from "../redux/users-reduсer";
+import { login, logout } from "../redux/auth-reducer";
 
 
 

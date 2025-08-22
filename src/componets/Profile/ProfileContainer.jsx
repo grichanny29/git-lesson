@@ -1,25 +1,28 @@
 
+
 import { useEffect } from 'react';
 import s from './Profile.module.css';
 import { connect } from 'react-redux';
-import { getStatus, getUserProfile, updateStatus } from '../../redux/profile-reduser';
-import { useParams } from 'react-router-dom';
+import { getStatus, getUserProfile, updateStatus } from '../../redux/profile-reduсer';
+import { useParams, useNavigate } from 'react-router-dom'; // 👈 добавляем useNavigate
 import Profile from './Profile';
 import { compose } from 'redux';
 
 function ProfileContainer(props) {
   const { userId } = useParams();
+  const navigate = useNavigate(); // 👈 создаём навигатор
 
   useEffect(() => {
-    // Приводим к числу, если userId есть
     const id = userId ? Number(userId) : props.authorizedUserId;
-
-    // Делаем запрос только если id определён и не NaN
     if (id) {
       props.getUserProfile(id);
       props.getStatus(id);
+
+      if (!userId && !props.isAuth) { // 👈 проверяем авторизацию
+        navigate("/login");          // 👈 редиректим через navigate
+      }
     }
-  }, [userId, props.authorizedUserId, props.getUserProfile, props.getStatus]);
+  }, [userId, props.authorizedUserId, props.getUserProfile, props.getStatus, props.isAuth, navigate]);
 
   return (
     <Profile
@@ -41,4 +44,3 @@ const mapStateToProps = (state) => ({
 export default compose(
   connect(mapStateToProps, { getUserProfile, getStatus, updateStatus })
 )(ProfileContainer);
-
